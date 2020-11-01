@@ -6,7 +6,7 @@
     "preinstall": "wasm-pack build",
     "prebuild": "wasm-pack build",
     "build": "webpack --config webpack.config.js",
-    "prerelease": "CDN_BUILD=true npm run build",
+    "prepublish": "CDN_BUILD=true npm run build",
     "release": "np"
   },
   "keywords": [
