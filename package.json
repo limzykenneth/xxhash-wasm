@@ -1,0 +1,28 @@
+{
+  "name": "xxhash-wasm",
+  "version": "0.1.0",
+  "description": "xxhash implementation in WebAssembly",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "wasm-pack build",
+    "prebuild": "wasm-pack build",
+    "build": "webpack --config webpack.config.js"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "xxhash",
+    "hash"
+  ],
+  "files": [
+    "dist/*.{js,wasm}",
+    "rust/pkg/*"
+  ],
+  "author": "Kenneth Lim <limzy.kenneth@gmail.com> (https://limzykenneth.com/)",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.1.0",
+    "xxhash-wasm": "file:./pkg"
+  }
+}
