@@ -1,8 +1,9 @@
 const path = require("path");
+const version = require("./package.json").version;
 
 let publicPath = null;
 if(process.env.CDN_BUILD === "true"){
-	publicPath = `https://cdn.jsdelivr.net/npm/xxhash-wasm@${version}/dist/`;
+	publicPath = `https://cdn.jsdelivr.net/npm/twoxhash-wasm@${version}/dist/`;
 }
 
 module.exports = {

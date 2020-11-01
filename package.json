@@ -1,11 +1,13 @@
 {
-  "name": "xxhash-wasm",
-  "version": "0.1.0",
-  "description": "xxhash implementation in WebAssembly",
+  "name": "twoxhash-wasm",
+  "version": "0.0.1",
+  "description": "xxhash implementation in WebAssembly using Rust twox-hash crate",
   "scripts": {
     "preinstall": "wasm-pack build",
     "prebuild": "wasm-pack build",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "prerelease": "CDN_BUILD=true npm run build",
+    "release": "np"
   },
   "keywords": [
     "webassembly",
