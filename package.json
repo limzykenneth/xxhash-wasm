@@ -1,6 +1,6 @@
 {
   "name": "twoxhash-wasm",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "xxhash implementation in WebAssembly using Rust twox-hash crate",
   "scripts": {
     "preinstall": "wasm-pack build",
