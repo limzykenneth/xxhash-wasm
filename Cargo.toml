@@ -1,5 +1,5 @@
 [package]
-name = "xxhash-wasm"
+name = "twoxhash-wasm"
 version = "0.1.0"
 authors = ["limzykenneth <limzy.kenneth@gmail.com>"]
 edition = "2018"
@@ -8,8 +8,7 @@ edition = "2018"
 crate-type = ["cdylib", "rlib"]
 
 [features]
-default = ["console_error_panic_hook"]
-release = ["wee_alloc"]
+default = ["wee_alloc"]
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ["-Oz", "--enable-mutable-globals"]

@@ -1,3 +1,15 @@
+// Dynamic module loading
+if(process.env.ASSETS_PATH){
+	__webpack_public_path__ = process.env.ASSETS_PATH;
+}else{
+	var scriptSrc = document.currentScript.src;
+	var filename = scriptSrc.split("/").pop();
+	scriptSrc = scriptSrc.replace(filename, "");
+	scriptSrc = scriptSrc.replace(window.location.origin, "");
+	__webpack_public_path__ = scriptSrc;
+}
+
+// Glue code
 let wasm;
 async function init(){
 	wasm = await import("xxhash-wasm");
@@ -69,7 +81,7 @@ class XXHash3 extends Hasher {
 // Not exported as wasm-bidgen cannot output u128 yet
 class XXHash128 extends Hasher {
 	constructor(seed=0){
-		super(wasm.Hash64, seed);
+		super(wasm.Hash128, seed);
 		this.hasher = this.hashConstructor.new(BigInt(seed));
 	}
 
@@ -82,5 +94,6 @@ export {
 	init,
 	XXHash32,
 	XXHash64,
-	XXHash3
+	XXHash3,
+	XXHash128
 };
