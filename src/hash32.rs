@@ -19,7 +19,7 @@ impl Hash32 {
 		}
 	}
 
-	pub fn hash_string(&self, data: String, seed: JsValue) -> f64 {
+	pub fn hash_string(&self, data: String, seed: JsValue) -> String {
 		let mut hasher;
 
 		if seed.is_undefined() {
@@ -34,10 +34,10 @@ impl Hash32 {
 
 		hasher.write(data.as_bytes());
 		let result = hasher.finish();
-		result as f64
+		format!("{:x}", result)
 	}
 
-	pub fn hash_bytes(&self, data: &[u8], seed: JsValue) -> f64 {
+	pub fn hash_bytes(&self, data: &[u8], seed: JsValue) -> String {
 		let mut hasher;
 
 		if seed.is_undefined() {
@@ -52,7 +52,7 @@ impl Hash32 {
 
 		hasher.write(data);
 		let result =  hasher.finish();
-		result as f64
+		format!("{:x}", result)
 	}
 
 	pub fn init(&mut self, seed: u32) {
@@ -67,7 +67,7 @@ impl Hash32 {
 		self.hasher.write(data);
 	}
 
-	pub fn digest(&self) -> f64{
-		self.hasher.finish() as f64
+	pub fn digest(&self) -> String {
+		format!("{:x}", self.hasher.finish())
 	}
 }
