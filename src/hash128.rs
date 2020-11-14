@@ -3,6 +3,7 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use twox_hash::Xxh3Hash128;
 use std::hash::Hasher;
+use twox_hash::xxh3::HasherExt;
 
 #[wasm_bindgen]
 pub struct Hash128 {
@@ -33,7 +34,7 @@ impl Hash128 {
 		}
 
 		hasher.write(data.as_bytes());
-		format!("{:x}", hasher.finish())
+		format!("{:x}", hasher.finish_ext())
 	}
 
 	pub fn hash_bytes(&self, data: &[u8], seed: JsValue) -> String {
@@ -50,7 +51,7 @@ impl Hash128 {
 		}
 
 		hasher.write(data);
-		format!("{:x}", hasher.finish())
+		format!("{:x}", hasher.finish_ext())
 	}
 
 	pub fn init(&mut self, seed: u64) {
@@ -66,6 +67,6 @@ impl Hash128 {
 	}
 
 	pub fn digest(&self) -> String {
-		format!("{:x}", self.hasher.finish())
+		format!("{:x}", self.hasher.finish_ext())
 	}
 }
