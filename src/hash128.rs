@@ -1,6 +1,5 @@
 use super::utils;
 use wasm_bindgen::prelude::*;
-use wasm_bindgen::JsValue;
 use twox_hash::Xxh3Hash128;
 use std::hash::Hasher;
 use twox_hash::xxh3::HasherExt;
@@ -20,7 +19,7 @@ impl Hash128 {
 		}
 	}
 
-	pub fn hash_string(&self, data: String, seed: JsValue) -> String {
+	pub fn hash_string(&self, data: String, seed: JsValue) -> Result<String, JsError> {
 		let mut hasher;
 
 		if seed.is_undefined() {
@@ -28,16 +27,16 @@ impl Hash128 {
 		} else {
 			let seed_val = match seed.as_f64() {
 				Some(x) => x as u64,
-				None => panic!("Seed must be a number"),
+				None => return Err(JsError::new("Seed must be a number")),
 			};
 			hasher = Xxh3Hash128::with_seed(seed_val);
 		}
 
 		hasher.write(data.as_bytes());
-		format!("{:x}", hasher.finish_ext())
+		Ok(format!("{:x}", hasher.finish_ext()))
 	}
 
-	pub fn hash_bytes(&self, data: &[u8], seed: JsValue) -> String {
+	pub fn hash_bytes(&self, data: &[u8], seed: JsValue) -> Result<String, JsError> {
 		let mut hasher;
 
 		if seed.is_undefined() {
@@ -45,13 +44,13 @@ impl Hash128 {
 		} else {
 			let seed_val = match seed.as_f64() {
 				Some(x) => x as u64,
-				None => panic!("Seed must be a number"),
+				None => return Err(JsError::new("Seed must be a number")),
 			};
 			hasher = Xxh3Hash128::with_seed(seed_val);
 		}
 
 		hasher.write(data);
-		format!("{:x}", hasher.finish_ext())
+		Ok(format!("{:x}", hasher.finish_ext()))
 	}
 
 	pub fn init(&mut self, seed: u64) {
