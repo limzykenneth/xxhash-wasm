@@ -7,7 +7,8 @@
     "prebuild": "wasm-pack build",
     "build": "webpack --config webpack.config.js",
     "prepublish": "CDN_BUILD=true npm run build",
-    "release": "np"
+    "release": "np",
+    "test": "echo 'No test defined'"
   },
   "keywords": [
     "webassembly",
